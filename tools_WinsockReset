@@ -1,0 +1,9 @@
+title Winsock Catalog Reset
+cls
+color a
+cls
+echo Resetting Winsock Catalog...
+netsh winsock reset
+echo Done.
+pause
+
