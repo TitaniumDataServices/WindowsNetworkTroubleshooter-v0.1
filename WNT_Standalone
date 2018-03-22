@@ -1,0 +1,140 @@
+@echo off
+title Windows Network Troubleshooting Tool
+cd C:\Windows
+cls
+
+@ECHO OFF
+SETLOCAL
+
+IF "%selfWrapped%"=="" (
+  REM this is necessary so that we can use "exit" to terminate the batch file,
+  REM and all subroutines, but not the original cmd.exe
+  SET selfWrapped=true
+  %ComSpec% /s /c ""%~0" %*"
+  GOTO :EOF
+)
+
+cls
+
+color 3
+echo Welcome to the Windows Network Troubleshooter.
+
+pause
+cls
+
+color c
+echo This tool will help you troubleshoot Network problems easilly.
+echo Please note that this tool is currently in BETA, so some functions might not work,
+echo or they are not propperly configured in the tool yet.
+echo If you find any issues, or feature requests, please contact me via the contact information
+echo in the "README" document included in the ZIP file this software came in.
+
+pause
+cls
+
+color 8
+echo NOTE: Neither me or this tool is associated with Windows.
+echo Please don't get in touch with Microsoft if this tool doesn't work. 
+echo Contact me instead, with the contact information found in the
+echo "README" document included in the ZIP file this software came in.
+
+pause
+cls
+
+pause
+color a
+echo Checking for elevation. Please wait..
+color c
+REG QUERY "HKU\S-1-5-19"
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO ERROR: THE APPLICATION DOES NOT HAVE ADMINISTRATOR ACCESS!
+	ECHO PLEASE RIGHT CLICK, AND RUN THIS APPLICATION AS ADMININSTRATOR IN ORDER FOR THE TOOL TO DO IT'S JOB.
+    pause
+    EXIT /B 1
+)
+cls
+
+goto main
+
+:main
+color
+cls
+color b
+echo Here are the troubleshooting options:
+echo 1) Basic Windows Troubleshooting (Opens a Windows Troubleshooter. This is the most basic step in any troubleshooting procedure.)
+echo 2) Flush DNS Servers
+echo 3) Reset the Winsock Catalogue
+echo 4) Change DNS Settings
+echo 5) Exit
+
+set /p choice="Please chose a troubleshooting method:"
+
+if '%choice%'=='1' goto wintroubleshoot
+if '%choice%'=='2' goto flushdns
+if '%choice%'=='3' goto resetwinsock
+if '%choice%'=='4' goto changedns
+if '%choice%'=='5' goto exit
+pause
+
+:wintroubleshoot
+cls
+color d
+cls
+msdt.exe /id NetworkDiagnosticsWeb
+
+echo Returning to main menu.
+goto main
+
+:flushdns
+cls
+color a
+cls
+echo Flushing windows DNS servers...
+ipconfig /flushdns
+echo Done.
+pause
+echo Returning to main menu.
+cls
+goto main
+
+:resetwinsock
+cls
+color a
+cls
+echo Resetting Winsock Catalogue...
+netsh winsock reset
+echo Done.
+pause
+echo Returning to main menu.
+cls
+goto main
+
+:changedns
+cls
+color a
+cls
+echo Changing DNS Servers to Google's DNS... Please wait. 
+set DNS1=8.8.8.8
+set DNS2=8.8.4.4
+
+for /f "tokens=1,2,3*" %%i in ('netsh int show interface') do (
+    if %%i equ Enabled (
+        echo Changing "%%l" : %DNS1% + %DNS2%
+        netsh int ipv4 set dns name="%%l" static %DNS1% primary validate=no
+        netsh int ipv4 add dns name="%%l" %DNS2% index=2 validate=no 
+    )
+)
+
+ipconfig /flushdns
+
+echo Done. DNS Servers should be changed.
+echo NOTE: I haven't added the option to reset the DNS Settings YET, but it will be added in a future BETA.
+pause
+echo Returning to main menu.
+cls
+goto main
+
+:exit
+exit
+
+
