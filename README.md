@@ -17,3 +17,5 @@ If you ever experience problems with the tool, or you find other troubleshooting
 My mail: isak.dombestein2001@gmail.com
 
 One last disclaimer. This tool is only made for WINDOWS users, and it is meant to only troubleshoot and fix any eventual problems with the network on your Windows computer. If you didn’t get that – This tool is not for Mac or Linux. I’m still working on that. I currently have no estimate on when these are going to be released, or if they are going to be released at all.
+
+The software can be downloaded from here: https://www.dropbox.com/s/aqqqzpen34fazdi/Windows%20Network%20Troubleshooter%20v0.1.zip?dl=0
