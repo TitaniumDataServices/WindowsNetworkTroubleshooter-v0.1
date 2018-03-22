@@ -14,7 +14,8 @@ The tool comes in two different variations. One of the tools will work in standa
 
 If you ever experience problems with the tool, or you find other troubleshooting steps that has not yet been included in this tool, please contact me on my email. I highly appreciate every tip and bug you can send me. 
 
-My mail: isak.dombestein2001@gmail.com
+My mail: titaniumdatasrv@gmail.com
+Mark the mail with "WNT BUG/SUGGESTION"!
 
 One last disclaimer. This tool is only made for WINDOWS users, and it is meant to only troubleshoot and fix any eventual problems with the network on your Windows computer. If you didn’t get that – This tool is not for Mac or Linux. I’m still working on that. I currently have no estimate on when these are going to be released, or if they are going to be released at all.
 
