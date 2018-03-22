@@ -1,0 +1,7 @@
+title Starting Windows Troubleshooter
+cls
+color d
+cls
+msdt.exe /id NetworkDiagnosticsWeb
+pause
+
